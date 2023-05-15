@@ -9,6 +9,7 @@ import { Pays } from './pays.model';
 })
 export class PaysComponent implements AfterViewInit, OnDestroy{
   sub!: Subscription;
+  downsub!: Subscription;
 
   @ViewChild('input')
   inputText!: ElementRef;
@@ -17,6 +18,14 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
     {
       code:'FR',
       libelle: 'France',
+    },
+    {
+      code:'AL',
+      libelle: 'Albania',
+    },
+    {
+      code:'DZ',
+      libelle: 'Algeria',
     },
     {
       code:'En',
@@ -29,6 +38,7 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
   ]
 
   paysAct: Array<Pays>=[];
+  paysNb: number = 0;
 
   constructor(){}
 
@@ -48,6 +58,7 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
           .startsWith(this.inputText.nativeElement.value.toLowerCase())
           );
       }
+      this.paysNb = 0;
     });
   }
 
@@ -56,6 +67,7 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
     setTimeout(function () {
       meComponent.paysAct = [];
     },150)
+    this.downsub.unsubscribe()
   }
 
   onFocus() {
@@ -66,12 +78,26 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
         .startsWith(this.inputText.nativeElement.value.toLowerCase())
         );
     }
+    this.downsub = fromEvent(this.inputText.nativeElement, 'keydown')
+    // Je ne peux pas utiliser x:KeyboardEvent
+    .subscribe((x) => {
+      if (x instanceof KeyboardEvent){
+        x.preventDefault
+        if (((x.key == 'ArrowDown')||(x.key == 'Tab'))&&(this.paysAct.length != 0)) {
+          if (this.paysAct.length <= this.paysNb) {
+            this.paysNb = 0;
+          }
+          this.inputText.nativeElement.value = this.paysAct[this.paysNb].libelle;
+          this.paysNb++;
+        }
+      }
+    });
   }
 
   selectPays(event : MouseEvent) {
+    // Il faut faire un double click pour que ça marche
     if ((event.target != null) && (event.target instanceof HTMLElement))
       {this.inputText.nativeElement.value = event.target.innerText;
-      console.log(event.target.innerText);
       }
   }
 

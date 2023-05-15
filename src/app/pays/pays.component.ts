@@ -42,8 +42,11 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
       if (x.trim().length===0){
         this.paysAct =[];
       } else {
-        this.paysAct = this.paysAct.filter((y)=>
-        y.libelle.toLowerCase().startsWith(x.toLowerCase()));
+        this.paysAct = this.pays.filter((y)=>
+        y.libelle
+          .toLowerCase()
+          .startsWith(this.inputText.nativeElement.value.toLowerCase())
+          );
       }
     });
   }

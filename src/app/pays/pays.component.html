@@ -1,0 +1,12 @@
+<div class="searchArea">
+  <label class="paysLabel" for="pays">Pays</label>
+  <input id="pays" type="text" #input (blur)="onBlur()" (focus)="onFocus()"/>
+  <ul class="resultList" *ngIf="paysAct.length > 0">
+    <li
+      *ngFor="let pays of paysAct"
+      (click)="selectPays($event)"
+    >
+      {{ pays.libelle}}
+    </li>
+  </ul>
+</div>

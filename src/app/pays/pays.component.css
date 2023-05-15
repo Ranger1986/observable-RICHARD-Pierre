@@ -1,0 +1,35 @@
+.searchArea {
+  position: relative;
+}
+
+.searchArea > input {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 25px;
+}
+
+.resultList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+  width: 300px;
+  position: absolute;
+  top: 30px;
+  left: 43px;
+}
+
+.resultList > li:not(:first-child){
+  border-top: 1px solid black;
+}
+.resultList > li {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.resultList > li:hover {
+  background-color: reg(209,209,209);
+}
+.paysLabel {
+  display: inline-block;
+  margin-right: 10px;
+}

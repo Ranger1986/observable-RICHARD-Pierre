@@ -82,13 +82,19 @@ export class PaysComponent implements AfterViewInit, OnDestroy{
     // Je ne peux pas utiliser x:KeyboardEvent
     .subscribe((x) => {
       if (x instanceof KeyboardEvent){
-        x.preventDefault
-        if (((x.key == 'ArrowDown')||(x.key == 'Tab'))&&(this.paysAct.length != 0)) {
+        if ((x.key == 'ArrowDown')&&(this.paysAct.length != 0)) {
           if (this.paysAct.length <= this.paysNb) {
             this.paysNb = 0;
           }
           this.inputText.nativeElement.value = this.paysAct[this.paysNb].libelle;
           this.paysNb++;
+        }
+        else if ((x.key == 'ArrowUp')&&(this.paysAct.length != 0)) {
+          this.paysNb--;
+          if (this.paysNb===-1) {
+            this.paysNb = this.paysAct.length-1;
+          }
+          this.inputText.nativeElement.value = this.paysAct[this.paysNb].libelle;
         }
       }
     });

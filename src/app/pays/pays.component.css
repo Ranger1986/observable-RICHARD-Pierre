@@ -1,8 +1,8 @@
-.searchArea {
+.search {
   position: relative;
 }
 
-.searchArea > input {
+.search > input {
   border: 1px solid grey;
   border-radius: 5px;
   height: 25px;
@@ -14,7 +14,6 @@
   margin: 0;
   border: 1px solid black;
   position: absolute;
-  top: 30px;
   left: 43px;
 }
 
@@ -23,10 +22,10 @@
 }
 .resultList > li {
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 5px 5px;
 }
 .resultList > li:hover {
-  background-color: reg(209,209,209);
+  background-color: white;
 }
 .paysLabel {
   display: inline-block;
